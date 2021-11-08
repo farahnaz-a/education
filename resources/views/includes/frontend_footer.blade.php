@@ -82,6 +82,8 @@
     <!-- Main JS -->
     <script src="{{ asset('frontend_assets/js/main.js') }}"></script>
 
+    @yield('js')
+
     <!-- Google Map js -->
     <script src="https://maps.googleapis.com/maps/api/js?key="></script>
     <script src="{{ asset('frontend_assets/js/map-script.js') }}"></script>

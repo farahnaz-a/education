@@ -42,13 +42,18 @@ class ContactController extends Controller
     {
         //Form Validation
         $request->validate([
-            'name'    => 'required',
-            'email'   => 'required',
-            'phone'   => 'required',
-            'message' => 'required',
+            'name'      => 'required',
+            'email'     => 'required',
+            'subject'   => 'required',
+            'phone'     => 'required',
+            'message'   => 'required',
         ]);
 
         Contact::create($request->except('_token') + ['created_at' => Carbon::now()]);
+
+
+        return back()->withSuccess('Submited Sucessfully');
+
     }
 
     /**

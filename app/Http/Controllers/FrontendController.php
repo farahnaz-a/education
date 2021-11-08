@@ -30,6 +30,12 @@ class FrontendController extends Controller
 
         return view('frontend.courseDetails');
     }
+    
+    // Course List Page
+    public function contacts(){
+
+        return view('frontend.contacts');
+    }
 
 // End    
 }

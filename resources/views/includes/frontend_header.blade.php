@@ -8,12 +8,13 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('uploads/generalsettings') }}/{{ generalsettings()->favicon }}">
 
     <!-- CSS
 	============================================ -->
-
 
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{{ asset('frontend_assets/css/plugins/font-awesome.min.css') }}">
@@ -46,10 +47,8 @@
         <!-- Header Start  -->
         <div id="header" class="header section">
             <div class="container">
-
                 <!-- Header Wrapper Start  -->
                 <div class="header-wrapper">
-
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="{{ url('/') }}">
@@ -57,7 +56,6 @@
                         </a>
                     </div>
                     <!-- Header Logo End -->
-
                     <!-- Header Menu Start -->
                     <div class="header-menu d-none d-lg-block">
                         <ul class="main-menu">
@@ -68,22 +66,19 @@
                                 <a class="@yield('courses')" href="{{ route('frontend.courseList') }}">Courses</a>
                             </li>
                             <li>
-                                <a class="@yield('contact')" href="">Contact</a>
+                                <a class="@yield('contacts')" href="{{ route('frontend.contacts') }}">Contact</a>
                             </li>
                         </ul>
                     </div>
                     <!-- Header Menu End -->
-
                     <!-- Header Meta Start -->
                     <div class="header-meta">
-
                         <div class="header-search d-none d-lg-block">
                             <form action="#">
                                 <input type="text" placeholder="Search Courses">
                                 <button><i class="flaticon-loupe"></i></button>
                             </form>
                         </div>
-
                         @guest
                             <div class="header-login d-none d-lg-flex">
                                 <a class="link" href="{{ route('login') }}"><i class="fa fa-user-o"></i> Login</a>
@@ -101,17 +96,14 @@
 
                     </div>
                     <!-- Header Meta End -->
-
                 </div>
                 <!-- Header Wrapper End -->
-
             </div>
         </div>
         <!-- Header End -->
 
         <!-- Offcanvas Start -->
         <div class="offcanvas offcanvas-start" id="offcanvasMenu">
-
             <div class="offcanvas-header">
                 <!-- Offcanvas Logo Start -->
                 <div class="offcanvas-logo">
@@ -122,7 +114,6 @@
                 <!-- Offcanvas Logo End -->
                 <button class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
-
             <div class="offcanvas-body">
                 <div class="offcanvas-menu">
                     <ul class="main-menu">
@@ -133,7 +124,7 @@
                             <a class="@yield('courses')" href="{{ route('frontend.courseList') }}">Courses</a>
                         </li>
                         <li>
-                            <a class="@yield('contact')" href="">Contact</a>
+                            <a class="@yield('contact')" href="{{ route('frontend.contacts') }}">Contact</a>
                         </li>
                         @guest
                             <li>
@@ -143,6 +134,5 @@
                     </ul>
                 </div>
             </div>
-
         </div>
         <!-- Offcanvas End -->

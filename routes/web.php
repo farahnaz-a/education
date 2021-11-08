@@ -28,6 +28,7 @@ Route::group(['middleware' => 'visitor_log'], function(){
     Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
     Route::get('courses', [FrontendController::class, 'courseList'])->name('frontend.courseList');
     Route::get('courses/details', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
+    Route::get('contact-with-us', [FrontendController::class, 'contacts'])->name('frontend.contacts');
 
 });
 
