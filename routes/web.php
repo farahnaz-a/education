@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorSettingController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\SocialurlController;
@@ -26,8 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'visitor_log'], function(){
 
     Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
-    Route::get('courses', [FrontendController::class, 'courseList'])->name('frontend.courseList');
-    Route::get('courses/details', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
+    Route::get('course/list', [FrontendController::class, 'courseList'])->name('frontend.courseList');
+    Route::get('courses/details/{slug}', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
     Route::get('contact-with-us', [FrontendController::class, 'contacts'])->name('frontend.contacts');
 
 });
@@ -66,6 +67,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
     Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
 
 });
+
+    // CourseController
+    Route::resource('courses', CourseController::class);
 
     //  ContactController
     Route::resource('contacts', ContactController::class);

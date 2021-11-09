@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -13,7 +14,8 @@ class FrontendController extends Controller
 
         return view('frontend.index',[
             
-            'banner' => Banner::first(),
+            'banner'  => Banner::first(),
+            'courses' => Course::latest()->get(),
         ]);
 
     }
@@ -22,16 +24,23 @@ class FrontendController extends Controller
     // Course List Page
     public function courseList(){
         
-        return view('frontend.courseList');
+        return view('frontend.courseList',[
+            'courses' => Course::latest()->get(),
+        ]);
     }
 
-    // Course List Page
-    public function courseDetails(){
+    // Course Details
+    public function courseDetails($slug){
 
-        return view('frontend.courseDetails');
+        $course = Course::where('slug', $slug)->first();
+
+        return view('frontend.courseDetails',[
+            'course'          => $course,
+            'related_courses' => Course::where('category_id', $course->category_id)->get(),
+        ]);
     }
     
-    // Course List Page
+    // Course Contact
     public function contacts(){
 
         return view('frontend.contacts');

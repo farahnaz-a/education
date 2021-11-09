@@ -2,7 +2,7 @@
 
 {{-- Title --}}
 @section('title')
-    {{ config('app.name') }} | Course Details
+    {{ config('app.name') }} | {{ $course->title }}
 @endsection
 
 {{-- Menu Active --}}
@@ -18,22 +18,22 @@
             <!-- Course Details Banner Content Start -->
             <div class="course-details-banner-content">
 
-                <h2 class="title">2021 Complete Python Bootcamp From Zero to Hero in Python </h2>
+                <h2 class="title">{{ $course->title }}</h2>
 
-                <p>Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games </p>
+                <p>{{ $course->short_description }}</p>
 
                 <div class="course-details-meta">
                     <div class="meta-action">
                         <div class="meta-author">
-                            <img src="{{ asset('frontend_assets/images/author-1.jpg') }}" alt="Author">
+                            <img src="{{ $course->getAuthor->profile_photo_url }}" alt="Author">
                         </div>
                         <div class="meta-name">
-                            <h5 class="name">Adam Helen</h5>
+                            <h5 class="name">{{ $course->getAuthor->name }}</h5>
                         </div>
                     </div>
 
                     <div class="meta-action">
-                        <p class="label">Last Update : <span>2/12/2021</span></p>
+                        <p class="label">Last Update : <span>{{ $course->updated_at->format('d M Y') }}</span></p>
                     </div>
                 </div>
             </div>
@@ -52,24 +52,10 @@
                     <!-- Course Details Wrapper Start -->
                     <div class="course-details-wrapper">
 
-                        <!-- Course Overview Start -->
-                        <div class="course-overview">
+                        <!-- Course Overview -->
+                        <div class="course-learn-list mt-0">
                             <h3 class="title">Course Overview</h3>
-                            <p>World-class training and development programs developed by top teachers. Build skills with courses, certificates, and degrees online from world-class universities and companies. from the National Research University Higher School of Economics (HSE University) is the first fully online.</p>
-                        </div>
-                        <!-- Course Overview End -->
-
-                        <!-- Course Learn List Start -->
-                        <div class="course-learn-list">
-                            <h3 class="title">What you will learn</h3>
-                            <ul>
-                                <li>Become a UX designer.</li>
-                                <li>Become a UX designer.</li>
-                                <li>You will be able to add UX designer to your CV</li>
-                                <li>You will be able to add UX designer to your CV</li>
-                                <li>Build & test a full website design.</li>
-                                <li>Build & test a full website design.</li>
-                            </ul>
+                            <p>{!! $course->course_overview !!}</p>
                         </div>
                         <!-- Course Learn List End -->
 
@@ -80,7 +66,7 @@
                                 <h3 class="title">Course Content</h3>
                                 <div class="lessons-time">
                                     <span>10 Lessons</span>
-                                    <span>6h 40m</span>
+                                    <span>2hours 10min</span>
                                 </div>
                             </div>
 
@@ -142,20 +128,20 @@
                         <!-- Sidebar Details Video Description Start -->
                         <div class="sidebar-details-video-description">
                             <div class="sidebar-video">
-                                <img src="{{ asset('frontend_assets/images/sidebar-video.jpg') }}" alt="video">
-                                <a href="https://youtu.be/cdZHQFCqK3g" class="play videoLightbox" href="#"><i class="fa fa-play"></i></a>
+                                <img src="{{ asset('uploads/courses') }}/{{ $course->thumbnail_image }}" alt="video">
+                                <a href="" class="play videoLightbox" href="#"><i class="fa fa-play"></i></a>
                             </div>
                             <div class="sidebar-description">
                                 <div class="price">
-                                    <span class="sale-price">$49.99</span>
-                                    <span class="regular-price">$102</span>
+                                    <span class="sale-price">${{ $course->price }}</span>
+                                    {{-- <span class="regular-price">$102</span> --}}
                                 </div>
                                 <a class="btn btn-primary btn-hover-heading-color w-100" href="#">Entroll</a>
                                 <ul class="description-list">
-                                    <li><i class="fa fa-clock-o"></i> Duration <span>52 mins</span></li>
-                                    <li><i class="fa fa-sliders"></i> Level <span>Expert</span></li>
+                                    <li><i class="fa fa-clock-o"></i> Duration <span>{{ $course->duration }}</span></li>
+                                    <li><i class="fa fa-sliders"></i> Level <span>{{ ucfirst($course->level) }}</span></li>
                                     <li><i class="fa fa-file-o"></i> Lectures <span>4 Lectures</span></li>
-                                    <li><i class="fa fa-language"></i> Language <span>English</span></li>
+                                    <li><i class="fa fa-language"></i> Language <span>{{ ucfirst($course->language) }}</span></li>
                                     <li><i class="fa fa-user-o"></i> Enrolled <span>4 Enrolled</span></li>
                                 </ul>
                                 <a class="btn btn-outline-primary w-100" href="#"><i class="fa fa-share"></i> Share This Course</a>
@@ -168,32 +154,27 @@
                             <h4 class="sidebar-details-title">Releted Courses</h4>
 
                             <ul class="sidebar-details-courses">
-                                <li>
-                                    <!-- Single Course Start -->
-                                    <div class="sidebar-course-item">
-                                        <div class="item-image">
-                                            <a href=""><img src="{{ asset('frontend_assets/images/courses/courses-2.jpg') }}" alt="Courses"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <h3 class="title"><a href="">Cupidatat non proident sunt culpa officia deserunt</a></h3>
-                                            <span class="price">Price  <strong>$45</strong></span>
-                                        </div>
-                                    </div>
-                                    <!-- Single Course End -->
-                                </li>
-                                <li>
-                                    <!-- Single Course Start -->
-                                    <div class="sidebar-course-item">
-                                        <div class="item-image">
-                                            <a href=""><img src="{{ asset('frontend_assets/images/courses/courses-3.jpg') }}" alt="Courses"></a>
-                                        </div>
-                                        <div class="item-content">
-                                            <h3 class="title"><a href="">Cupidatat non proident sunt culpa officia deserunt</a></h3>
-                                            <span class="price">Price  <strong>$45</strong></span>
-                                        </div>
-                                    </div>
-                                    <!-- Single Course End -->
-                                </li>
+                                @foreach ($related_courses as $item)
+                                    @if ($course->id != $item->id)
+                                        <li>
+                                            <!-- Single Course Start -->
+                                            <div class="sidebar-course-item">
+                                                <div class="item-image">
+                                                    <a href="{{ route('frontend.courseDetails', $item->slug) }}">
+                                                        <img src="{{ asset('frontend_assets/images/courses/courses-2.jpg') }}" alt="Courses">
+                                                    </a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="title"><a href="">{{ $item->title }}</a></h3>
+                                                    <span class="price">Price  <strong>${{ $item->price }}</strong></span>
+                                                </div>
+                                            </div>
+                                            <!-- Single Course End -->
+                                        </li>
+                                        @else 
+                                        No Related Course
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                         <!-- Sidebar Course End -->

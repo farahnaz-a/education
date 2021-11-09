@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
+
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -41,6 +43,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/pages/app-invoice-list.css') }}">
 
+    <style>
+        .trix-button-group.trix-button-group--file-tools{
+            display: none;
+        }
+
+    </style>
+    
     @yield('css')
     <!-- END: Page CSS-->
 
@@ -227,21 +236,21 @@
                             </li>
                         </ul>
                     </li>
-                {{-- Banners --}}
+                    {{-- Banners --}}
                     <li class="nav-item @yield('banners')">
                         <a class="d-flex align-items-center" href="{{ route('banners.index') }}">
                             <i data-feather='columns'></i>
                             <span class="menu-title text-truncate">Banners</span>
                         </a>
                     </li>
-                {{-- Contacts --}}
+                    {{-- Contacts --}}
                     <li class="nav-item @yield('contacts')">
                         <a class="d-flex align-items-center" href="{{ route('contacts.index') }}">
                             <i data-feather='user-plus'></i>
                             <span class="menu-title text-truncate">Conacts</span>
                         </a>
                     </li>
-                {{-- Subscribers --}}
+                    {{-- Subscribers --}}
                     <li class="nav-item @yield('subscribers')">
                         <a class="d-flex align-items-center" href="{{ route('subscribers.index') }}">
                             <i data-feather='users'></i>
@@ -249,52 +258,78 @@
                         </a>
                     </li>
 
-                <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
-                </li>
-                {{-- Categories --}}
-                    <li class=" nav-item">
-                        <a class="d-flex align-items-center" href="#">
-                            <i data-feather='anchor'></i>
-                            <span class="menu-title text-truncate" data-i18n="Invoice">Categories</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li class="@yield('categoriesList')">
-                                <a class="d-flex align-items-center" href="{{ route('categories.index') }}">
-                                    <i data-feather="circle"></i>
-                                    <span class="menu-item text-truncate" data-i18n="List">List</span>
-                                </a>
-                            </li>
-                            <li class="@yield('categoriesCreate')">
-                                <a class="d-flex align-items-center" href="{{ route('categories.create') }}">
-                                    <i data-feather="circle"></i>
-                                    <span class="menu-item text-truncate" data-i18n="Add">Create</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                {{-- Site Settings --}}
-                    <li class="navigation-header">
-                        <span data-i18n="Apps &amp; Pages">Site Settings</span>
-                        <i data-feather="more-horizontal"></i>
-                    </li>
-                    <li class="nav-item @yield('generalSettings')">
-                        <a class="d-flex align-items-center" href="{{ route('generalSettings.index') }}">
-                            <i data-feather='settings'></i>
-                            <span class="menu-title text-truncate">General Settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item @yield('colorSettings')">
-                        <a class="d-flex align-items-center" href="{{ route('colorSettings.index') }}">
-                            <i data-feather='settings'></i>
-                            <span class="menu-title text-truncate">Color Settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item @yield('socialurls')">
-                        <a class="d-flex align-items-center" href="{{ route('socialurls.index') }}">
-                            <i data-feather='settings'></i>
-                            <span class="menu-title text-truncate">Social Urls</span>
-                        </a>
-                    </li>
+               
+                    @if (Auth::user()->role == 'author' || Auth::user()->role == 'admin')
+                        <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
+                        </li>
+                        {{-- Categories --}}
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="#">
+                                <i data-feather='anchor'></i>
+                                <span class="menu-title text-truncate" data-i18n="Invoice">Categories</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li class="@yield('categoriesList')">
+                                    <a class="d-flex align-items-center" href="{{ route('categories.index') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="List">List</span>
+                                    </a>
+                                </li>
+                                <li class="@yield('categoriesCreate')">
+                                    <a class="d-flex align-items-center" href="{{ route('categories.create') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- Course --}}
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="#">
+                                <i data-feather='anchor'></i>
+                                <span class="menu-title text-truncate" data-i18n="Invoice">Course</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li class="@yield('coursesList')">
+                                    <a class="d-flex align-items-center" href="{{ route('courses.index') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="List">List</span>
+                                    </a>
+                                </li>
+                                <li class="@yield('coursesCreate')">
+                                    <a class="d-flex align-items-center" href="{{ route('courses.create') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    {{-- Site Settings --}}
+                    @if (Auth::user()->role == 'admin')
+                        <li class="navigation-header">
+                            <span data-i18n="Apps &amp; Pages">Site Settings</span>
+                            <i data-feather="more-horizontal"></i>
+                        </li>
+                        <li class="nav-item @yield('generalSettings')">
+                            <a class="d-flex align-items-center" href="{{ route('generalSettings.index') }}">
+                                <i data-feather='settings'></i>
+                                <span class="menu-title text-truncate">General Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @yield('colorSettings')">
+                            <a class="d-flex align-items-center" href="{{ route('colorSettings.index') }}">
+                                <i data-feather='settings'></i>
+                                <span class="menu-title text-truncate">Color Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item @yield('socialurls')">
+                            <a class="d-flex align-items-center" href="{{ route('socialurls.index') }}">
+                                <i data-feather='settings'></i>
+                                <span class="menu-title text-truncate">Social Urls</span>
+                            </a>
+                        </li>
+                    @endif
 
             </ul>
         </div>
@@ -369,24 +404,20 @@
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app.js') }}"></script>
-    <!-- END: Theme JS-->
-    <!-- END: Page JS-->
     <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app-menu.js') }}"></script>
-    <!-- BEGIN: Page JS-->
 
+    <!-- BEGIN: Page JS-->
     @yield('js')
 
 
+    {{-- Dark mode/Night mode --}}
     <script>
-
         $(document).ready(function(){
             $('#dark').click(function(){
                  $.ajaxSetup({
@@ -408,6 +439,8 @@
         })
       
     </script>
+
+    {{-- Toogle --}}
     <script>
         $(document).ready(function(){
             $('#toggle').click(function(){
@@ -434,7 +467,6 @@
     </script>
 
 
-
     <script>
         $(window).on('load', function() {
             if (feather) {
@@ -446,6 +478,7 @@
         })
     </script>
     
+    {{-- Data Table --}}
     <script>
         $(document).ready(function() {
             $('#data_table').DataTable();

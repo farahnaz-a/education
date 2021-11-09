@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('verified');
+        $this->middleware('CheckAdmin');
+        $this->middleware('CheckAuthor');
+    }
+
     /**
      * Display a listing of the resource.
      *
