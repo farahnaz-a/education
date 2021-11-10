@@ -35,6 +35,7 @@ class FrontendController extends Controller
         $course = Course::where('slug', $slug)->first();
 
         return view('frontend.courseDetails',[
+            
             'course'          => $course,
             'related_courses' => Course::where('category_id', $course->category_id)->get(),
         ]);

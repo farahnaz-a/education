@@ -28,7 +28,7 @@
                             <img src="{{ $course->getAuthor->profile_photo_url }}" alt="Author">
                         </div>
                         <div class="meta-name">
-                            <h5 class="name">{{ $course->getAuthor->name }}</h5>
+                            <h5 class="name">{{ ucfirst($course->getAuthor->name) }}</h5>
                         </div>
                     </div>
 
@@ -152,7 +152,6 @@
                         <!-- Sidebar Course Start -->
                         <div class="sidebar-details-course">
                             <h4 class="sidebar-details-title">Releted Courses</h4>
-
                             <ul class="sidebar-details-courses">
                                 @foreach ($related_courses as $item)
                                     @if ($course->id != $item->id)
@@ -171,7 +170,7 @@
                                             </div>
                                             <!-- Single Course End -->
                                         </li>
-                                        @else 
+                                    @else 
                                         No Related Course
                                     @endif
                                 @endforeach

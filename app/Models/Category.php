@@ -10,4 +10,11 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    public function getCourses(){
+
+        return $this->hasMany('App\Models\Course');
+    }
+
 }

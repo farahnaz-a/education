@@ -212,7 +212,7 @@ class CourseController extends Controller
         $course->save();
 
         // Return Back With Success Message
-        return redirect()->route('courses.index')->withSuccess('Added successfully');
+        return redirect()->route('courses.show', $course->id)->withSuccess('Updated successfully');
 
     }
 

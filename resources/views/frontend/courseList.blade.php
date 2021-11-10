@@ -76,7 +76,7 @@
                                         @foreach ( categories() as $category)  
                                             <li class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="checkbox3">
-                                                <label class="form-check-label" for="checkbox3">{{ $category->category_name }} (0)</label>
+                                                <label class="form-check-label" for="checkbox3">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
                                             </li>
                                         @endforeach
                                     </ul>
