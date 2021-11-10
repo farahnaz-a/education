@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -40,12 +41,27 @@ class FrontendController extends Controller
             'related_courses' => Course::where('category_id', $course->category_id)->get(),
         ]);
     }
+
+    // Course Details
+    public function courseByCategory($category_name){
+
+        $category = Category::where('category_name', $category_name)->get();
+
+        foreach ($category as $value) {
+
+            $courses = $value->getCourses;
+            return view('frontend.coursesByCategory',compact('courses'));
+        }
+
+    }
     
     // Course Contact
     public function contacts(){
 
         return view('frontend.contacts');
     }
+
+
 
 // End    
 }

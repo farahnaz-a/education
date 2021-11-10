@@ -90,7 +90,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <!-- Category Item Start -->
                         <div class="single-category-item category-white text-center">
-                            <a href="#">
+                            <a href="{{ route('frontend.courseByCategory', $category->category_name) }}">
                                 <span class="title">{{ ucfirst($category->category_name) }}</span>
                             </a>
                         </div>
