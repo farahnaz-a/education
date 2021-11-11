@@ -100,36 +100,39 @@
 
                     <!-- Contact Form Start -->
                     <div class="contact-form-wrapper">
-                        <form action="{{ route('contacts.store')}}" method="POST">
+                        <form id="summitForm" action="{{ route('contacts.store')}}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <input id="name" name="name" type="text" class="form-control" placeholder="Your Name*">
-                                        @error('name')
+                                        {{-- @error('name')
                                             <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                            @enderror --}}
+                                            <small id="nameError" class="text-danger"> </small>
+                                        </div>
+                                        <!-- Single Form End -->
                                     </div>
-                                    <!-- Single Form End -->
-                                </div>
-                                <div class="col-md-6">
-                                    <!-- Single Form Start -->
-                                    <div class="single-form">
-                                        <input id="email" name="email" type="email" class="form-control" placeholder="Your Email*">
-                                        @error('email')
+                                    <div class="col-md-6">
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input id="email" name="email" type="email" class="form-control" placeholder="Your Email*">
+                                            <small id="emailError" class="text-danger"> </small>
+                                            {{-- @error('email')
                                             <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                            @enderror --}}
+                                        </div>
+                                        <!-- Single Form End -->
                                     </div>
-                                    <!-- Single Form End -->
-                                </div>
-                                <div class="col-md-6">
-                                    <!-- Single Form Start -->
-                                    <div class="single-form">
-                                        <input id="phone" name="phone" type="text" class="form-control" placeholder="Your Phone*">
-                                        @error('phone')
+                                    <div class="col-md-6">
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input id="phone" name="phone" type="text" class="form-control" placeholder="Your Phone*">
+                                            <small id="phoneError" class="text-danger"> </small>
+                                        {{-- @error('phone')
                                             <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                     <!-- Single Form End -->
                                 </div>
@@ -137,9 +140,11 @@
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <input id="subject" name="subject" type="text" class="form-control" placeholder="Subject*">
-                                        @error('subject')
+                                        {{-- @error('subject')
                                             <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                        @enderror --}}
+                                        <small id="subjectError" class="text-danger"> </small>
+
                                     </div>
                                     <!-- Single Form End -->
                                 </div>
@@ -147,13 +152,16 @@
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <textarea id="message" name="message" class="form-control" placeholder="Write A Massage*"></textarea>
-                                        @error('message')
+                                        {{-- @error('message')
                                             <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                        @enderror --}}
+                                        <small id="messageError" class="text-danger"> </small>
                                     </div>
                                     <!-- Single Form End -->
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3" id="success" >
+                                    
+                                    
                                     @if (session('success'))
                                         <div class="alert alert-success">{{ session('success') }}</div>
                                     @endif
@@ -184,11 +192,12 @@
 @section('js')
 
     {{-- Conatct form --}}
-    {{-- <script>
+    <script>
 
         $(document).ready(function(){
-            $('#submit').click(function() {
-
+  
+            $('#submit').click(function(e) {
+                e.preventDefault();
                 let name      = $('#name').val();
                 let phone     = $('#phone').val();
                 let email     = $('#email').val();
@@ -213,9 +222,23 @@
                     },
                     
                     success: function (data) {
-                    $('#success').html('You are subscribed');
-                    $('#error').css('display', 'none');
+                        // alert(data);
+                        $('#summitForm').trigger('reset');
+                        $('#nameError').text('');
+                        $('#emailError').text('');
+                        $('#phoneError').text('');
+                        $('#subjectError').text('');
+                        $('#messageError').text('');
+                        $('#success').html('<div class="alert alert-success">You are subscribed </div>');
+                    // $('#error').css('display', 'none');
                     },
+                    error: function(response){
+                        $('#nameError').text(response.responseJSON.errors.name);
+                        $('#emailError').text(response.responseJSON.errors.email);
+                        $('#phoneError').text(response.responseJSON.errors.phone);
+                        $('#subjectError').text(response.responseJSON.errors.subject);
+                        $('#messageError').text(response.responseJSON.errors.message);
+                    }
                     
                 });
 
@@ -223,5 +246,5 @@
 
         });
 
-    </script> --}}
+    </script>
 @endsection

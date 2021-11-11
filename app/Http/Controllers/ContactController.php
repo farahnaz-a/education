@@ -40,7 +40,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //Form Validation
+        // //Form Validation 
         $request->validate([
             'name'      => 'required',
             'email'     => 'required',
@@ -52,7 +52,9 @@ class ContactController extends Controller
         Contact::create($request->except('_token') + ['created_at' => Carbon::now()]);
 
 
-        return back()->withSuccess('Submited Sucessfully');
+        // return back()->withSuccess('Submited Sucessfully');
+        return response('Submited Sucessfully');
+        
 
     }
 
