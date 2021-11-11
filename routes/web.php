@@ -28,9 +28,10 @@ Route::group(['middleware' => 'visitor_log'], function(){
 
     Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
     Route::get('course/list', [FrontendController::class, 'courseList'])->name('frontend.courseList');
-    Route::get('courses/details/{slug}', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
-    Route::get('courses/{category_name}', [FrontendController::class, 'courseByCategory'])->name('frontend.courseByCategory');
+    Route::get('course/details/{slug}', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
+    Route::get('course/{category_name}', [FrontendController::class, 'courseByCategory'])->name('frontend.courseByCategory');
     Route::get('contact-with-us', [FrontendController::class, 'contacts'])->name('frontend.contacts');
+    Route::get('search', [FrontendController::class, 'search'])->name('search');
 
 });
 

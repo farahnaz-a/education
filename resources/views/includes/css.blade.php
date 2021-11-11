@@ -3879,7 +3879,7 @@ only screen and (max-width: 767px) {
     -webkit-transition: all 0.3s linear;
     -o-transition: all 0.3s linear;
     transition: all 0.3s linear;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     position: relative
 }
 
@@ -3946,8 +3946,8 @@ only screen and (max-width: 767px) {
 }
 
 .single-course .courses-content .top-meta .tag:hover {
-    background-color: #3bbca7;
-    color: #ffffff
+    /* background-color: #3bbca7;
+    color: #ffffff */
 }
 
 .single-course .courses-content .top-meta .price .sale-price {

@@ -62,6 +62,25 @@ class FrontendController extends Controller
     }
 
 
+    // Search
+    public function search(Request $request){
+
+        $search = $request->search;
+
+        $category = Category::where('category_name', 'LIKE', '%'.$search.'%')->first();
+        
+        if ($category != null) {
+
+            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->orwhere('category_id', $category->id)->get();
+        }
+        else {
+            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->get();
+        }
+        
+        return view('frontend.search', compact('courses'));
+    }
+
+
 
 // End    
 }

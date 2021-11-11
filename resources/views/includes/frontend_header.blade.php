@@ -74,9 +74,9 @@
                     <!-- Header Meta Start -->
                     <div class="header-meta">
                         <div class="header-search d-none d-lg-block">
-                            <form action="#">
-                                <input type="text" placeholder="Search Courses">
-                                <button><i class="flaticon-loupe"></i></button>
+                            <form action="{{ route('search') }}" method="GET">
+                                <input type="text" name="search" placeholder="Search Courses">
+                                <button type="submit"><i class="flaticon-loupe"></i></button>
                             </form>
                         </div>
                         @guest

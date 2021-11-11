@@ -20,7 +20,7 @@
                 <h2 class="title">Course List</h2>
                 <ul class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Course</li>
+                    <li class="breadcrumb-item active">Courses</li>
                 </ul>
             </div>
             <!-- Page Banner Content End -->
@@ -52,31 +52,13 @@
                         </div>
 
                         <!-- Page Pagination Start -->
-                        @if ($courses->count() != 0)
-                            @include('includes.pagination')
-                        @endif
+                        @include('includes.pagination')
                         <!-- Page Pagination End -->
 
                     </div>
                     <div class="col-lg-3 order-0 order-lg-1">
                         <!-- Sidebar Wrapper Start -->
-                        <div class="sidebar-wrap-02">
-                            <!-- Sidebar Wrapper Start -->
-                            <div class="sidebar-widget-02">
-                                <h3 class="widget-title">Categories</h3>
-                                <div class="widget-checkbox">
-                                    <ul class="checkbox-list">
-                                        @foreach ( categories() as $category)  
-                                            <li class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="checkbox3">
-                                                <label class="form-check-label" for="checkbox3">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Sidebar Wrapper End -->
-                        </div>
+                        @include('includes.filterByCategory')
                         <!-- Sidebar Wrapper End -->
                     </div>
                 </div>
