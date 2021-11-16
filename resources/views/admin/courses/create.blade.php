@@ -149,7 +149,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="duration">Course Duration</label>
-                                <input name="duration" value="{{ old('duration') }}" type="text" id="duration" placeholder="Enter course duration" class="form-control"/>
+                                <input name="duration" value="{{ old('duration') }}" type="text" id="duration" placeholder="Ex: 2hours 10m" class="form-control"/>
                                 @error('duration')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -157,8 +157,8 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="price">Course Price</label>
-                                <input name="price" value="{{ old('price') }}" type="text" id="price" placeholder="Enter course price" class="form-control"/>
+                                <label for="price">Course Price ($)</label>
+                                <input name="price" value="{{ old('price') }}" type="text" id="price" placeholder="Ex: 20.00" class="form-control"/>
                                 @error('price')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror

@@ -16,7 +16,7 @@ class FrontendController extends Controller
         return view('frontend.index',[
             
             'banner'  => Banner::first(),
-            'courses' => Course::latest()->get(),
+            'courses' => Course::latest()->take(6)->get(),
         ]);
 
     }
@@ -26,7 +26,7 @@ class FrontendController extends Controller
     public function courseList(){
         
         return view('frontend.courseList',[
-            'courses' => Course::latest()->get(),
+            'courses' => Course::latest()->Paginate(9),
         ]);
     }
 
@@ -45,22 +45,13 @@ class FrontendController extends Controller
     // Course Details
     public function courseByCategory($category_name){
 
-        $category = Category::where('category_name', $category_name)->get();
+        $category = Category::where('category_name', $category_name)->first();
 
-        foreach ($category as $value) {
+        $courses = Course::where('category_id', $category->id)->Paginate(6);
 
-            $courses = $value->getCourses;
-            return view('frontend.coursesByCategory',compact('courses'));
-        }
+        return view('frontend.courseList',compact('courses', 'category'));
 
-    }
-    
-    // Course Contact
-    public function contacts(){
-
-        return view('frontend.contacts');
-    }
-
+    } 
 
     // Search
     public function search(Request $request){
@@ -71,14 +62,21 @@ class FrontendController extends Controller
         
         if ($category != null) {
 
-            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->orwhere('category_id', $category->id)->get();
+            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->orwhere('category_id', $category->id)->Paginate(9);
         }
         else {
-            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->get();
+            $courses = Course::where('title', 'LIKE', '%'.$search.'%')->Paginate(9);
         }
         
-        return view('frontend.search', compact('courses'));
+        return view('frontend.courseList', compact('courses'));
     }
+
+        // Course Contact
+        public function contacts(){
+
+            return view('frontend.contacts');
+        }
+    
 
 
 

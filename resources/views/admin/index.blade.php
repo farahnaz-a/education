@@ -77,8 +77,8 @@ scrollbar-width: none;  /* Firefox */
 
     <div class="row match-height">
         <!-- Subscribers Chart Card starts -->
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
-            <div class="card">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-12">
+            <div class="card" style="overflow: hidden;">
                 <div class="card-header flex-column align-items-start pb-0">
                     <div class="avatar bg-light-primary p-50 m-0">
                         <div class="avatar-content">
@@ -93,31 +93,14 @@ scrollbar-width: none;  /* Firefox */
         </div>
         <!-- Subscribers Chart Card ends -->
 
-        <!-- Orders Chart Card starts -->
-        <div class="col-xl-3 col-lg-3 col-sm-6 col-12">
-            <div class="card">
-                <div class="card-header flex-column align-items-start pb-0">
-                    <div class="avatar bg-light-warning p-50 m-0">
-                        <div class="avatar-content">
-                            <i data-feather="package" class="font-medium-5"></i>
-                        </div>
-                    </div>
-                    <h2 class="font-weight-bolder mt-1">38.4K</h2>
-                    <p class="card-text">Orders Received</p>
-                </div>
-                <div id="order-chart"></div>
-            </div>
-        </div>
-        <!-- Orders Chart Card ends -->
-
-        <div class="col-xl-6 col-lg-8 col-md-7">
+        <div class="col-xl-8 col-lg-8 col-md-12">
             <div class="card user-card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-6 col-md-6 border-container-lg">
                             <div class="user-avatar-section">
                                 <div class="d-flex justify-content-start">
-                                    <img class="img-fluid rounded" src="{{ asset('dashboard_assets/app-assets/images/avatars/7.png') }}" height="104" width="104" alt="User avatar">
+                                    <img class="img-fluid rounded" src="{{  Auth::user()->profile_photo_url  }}" height="104" width="104" alt="User avatar">
                                     <div class="d-flex flex-column ml-1">
                                         <div class="user-info mb-1">
                                             <h4 class="mb-0">{{ Auth::user()->name }}</h4>
@@ -151,7 +134,7 @@ scrollbar-width: none;  /* Firefox */
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
+                        <div class="col-xl-6 col-md-6 mt-2 mt-xl-0">
                             <div class="user-info-wrapper">
                                 <div class="d-flex flex-wrap">
                                     <div class="user-info-title">
@@ -202,7 +185,7 @@ scrollbar-width: none;  /* Firefox */
     </div>
 
     <div class="row match-height">
-        <div class="col-lg-4 col-md-6 col-12">
+        <div class="col-lg-4 col-md-12 col-12">
             <div class="card card-browser-states">
                 <div class="card-header">
                     <div>
@@ -269,7 +252,7 @@ scrollbar-width: none;  /* Firefox */
             </div>
         </div>
 
-        <div class="col-lg-8 col-md-6 col-12 example" style="overflow-y:scroll; max-height: 432px !important">
+        <div class="col-lg-8 col-md-6 col-12 example" style="overflow-y:scroll; max-height: 407px !important">
             <div class="card">
                 <div class="card-header">
                     <div>

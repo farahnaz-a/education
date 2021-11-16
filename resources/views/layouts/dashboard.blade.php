@@ -48,7 +48,18 @@
             display: none;
         }
 
+           /* Hide scrollbar for Chrome, Safari and Opera */
+        .example::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .example {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
+
     
     @yield('css')
     <!-- END: Page CSS-->
@@ -216,52 +227,8 @@
 
                     <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
                     </li>
-                    <li class=" nav-item">
-                        <a class="d-flex align-items-center" href="#">
-                            <i data-feather='user-check'></i>
-                            <span class="menu-title text-truncate" data-i18n="Invoice">Users</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li class="@yield('usersList')">
-                                <a class="d-flex align-items-center" href="{{ route('users.index') }}">
-                                    <i data-feather="circle"></i>
-                                    <span class="menu-item text-truncate" data-i18n="List">List</span>
-                                </a>
-                            </li>
-                            <li class="@yield('usersCreate')">
-                                <a class="d-flex align-items-center" href="{{ route('users.create') }}">
-                                    <i data-feather="circle"></i>
-                                    <span class="menu-item text-truncate" data-i18n="Add">Create</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    {{-- Banners --}}
-                    <li class="nav-item @yield('banners')">
-                        <a class="d-flex align-items-center" href="{{ route('banners.index') }}">
-                            <i data-feather='columns'></i>
-                            <span class="menu-title text-truncate">Banners</span>
-                        </a>
-                    </li>
-                    {{-- Contacts --}}
-                    <li class="nav-item @yield('contacts')">
-                        <a class="d-flex align-items-center" href="{{ route('contacts.index') }}">
-                            <i data-feather='user-plus'></i>
-                            <span class="menu-title text-truncate">Conacts</span>
-                        </a>
-                    </li>
-                    {{-- Subscribers --}}
-                    <li class="nav-item @yield('subscribers')">
-                        <a class="d-flex align-items-center" href="{{ route('subscribers.index') }}">
-                            <i data-feather='users'></i>
-                            <span class="menu-title text-truncate">Subcribers</span>
-                        </a>
-                    </li>
-
-               
+                    
                     @if (Auth::user()->role == 'author' || Auth::user()->role == 'admin')
-                        <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
-                        </li>
                         {{-- Categories --}}
                         <li class=" nav-item">
                             <a class="d-flex align-items-center" href="#">
@@ -286,7 +253,7 @@
                         {{-- Course --}}
                         <li class=" nav-item">
                             <a class="d-flex align-items-center" href="#">
-                                <i data-feather='anchor'></i>
+                                <i data-feather='codepen'></i>
                                 <span class="menu-title text-truncate" data-i18n="Invoice">Course</span>
                             </a>
                             <ul class="menu-content">
@@ -304,9 +271,59 @@
                                 </li>
                             </ul>
                         </li>
+                        {{-- Lessons --}}
+                        <li class="nav-item @yield('lessons')">
+                            <a class="d-flex align-items-center" href="{{ route('lessons.create') }}">
+                                <i data-feather='airplay'></i>
+                                <span class="menu-title text-truncate">Lessons</span>
+                            </a>
+                        </li>
                     @endif
                     {{-- Site Settings --}}
                     @if (Auth::user()->role == 'admin')
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="#">
+                                <i data-feather='user-check'></i>
+                                <span class="menu-title text-truncate" data-i18n="Invoice">Users</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li class="@yield('usersList')">
+                                    <a class="d-flex align-items-center" href="{{ route('users.index') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="List">List</span>
+                                    </a>
+                                </li>
+                                <li class="@yield('usersCreate')">
+                                    <a class="d-flex align-items-center" href="{{ route('users.create') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- Banners --}}
+                        <li class="nav-item @yield('banners')">
+                            <a class="d-flex align-items-center" href="{{ route('banners.index') }}">
+                                <i data-feather='columns'></i>
+                                <span class="menu-title text-truncate">Banners</span>
+                            </a>
+                        </li>
+                        {{-- Contacts --}}
+                        <li class="nav-item @yield('contacts')">
+                            <a class="d-flex align-items-center" href="{{ route('contacts.index') }}">
+                                <i data-feather='user-plus'></i>
+                                <span class="menu-title text-truncate">Conacts</span>
+                            </a>
+                        </li>
+                        {{-- Subscribers --}}
+                        <li class="nav-item @yield('subscribers')">
+                            <a class="d-flex align-items-center" href="{{ route('subscribers.index') }}">
+                                <i data-feather='users'></i>
+                                <span class="menu-title text-truncate">Subcribers</span>
+                            </a>
+                        </li>
+                        <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
+                        </li>
                         <li class="navigation-header">
                             <span data-i18n="Apps &amp; Pages">Site Settings</span>
                             <i data-feather="more-horizontal"></i>
@@ -429,7 +446,7 @@
                     $.ajax({
                         url: "{{ route('theme.color') }}", 
                         type: "GET", 
-                        success: function(\)
+                        success: function(data)
                         {
                         }
                     })

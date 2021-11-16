@@ -107,9 +107,6 @@
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <input id="name" name="name" type="text" class="form-control" placeholder="Your Name*">
-                                        {{-- @error('name')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror --}}
                                             <small id="nameError" class="text-danger"> </small>
                                         </div>
                                         <!-- Single Form End -->
@@ -119,9 +116,6 @@
                                         <div class="single-form">
                                             <input id="email" name="email" type="email" class="form-control" placeholder="Your Email*">
                                             <small id="emailError" class="text-danger"> </small>
-                                            {{-- @error('email')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror --}}
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
@@ -130,9 +124,6 @@
                                         <div class="single-form">
                                             <input id="phone" name="phone" type="text" class="form-control" placeholder="Your Phone*">
                                             <small id="phoneError" class="text-danger"> </small>
-                                        {{-- @error('phone')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror --}}
                                     </div>
                                     <!-- Single Form End -->
                                 </div>
@@ -140,9 +131,6 @@
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <input id="subject" name="subject" type="text" class="form-control" placeholder="Subject*">
-                                        {{-- @error('subject')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror --}}
                                         <small id="subjectError" class="text-danger"> </small>
 
                                     </div>
@@ -152,9 +140,6 @@
                                     <!-- Single Form Start -->
                                     <div class="single-form">
                                         <textarea id="message" name="message" class="form-control" placeholder="Write A Massage*"></textarea>
-                                        {{-- @error('message')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror --}}
                                         <small id="messageError" class="text-danger"> </small>
                                     </div>
                                     <!-- Single Form End -->

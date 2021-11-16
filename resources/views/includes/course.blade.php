@@ -17,6 +17,7 @@
                     @endif
                 </div>
                 <h3 class="title"><a href="">{{ $course->title }}</a></h3>
+                <p class="author-name">{{ ucfirst($course->getAuthor->name )}}</p>
             </div>
             <div class="courses-meta">
                 <p class="student"><i class="fa fa-user-o"></i> Student</p>

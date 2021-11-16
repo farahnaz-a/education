@@ -33,19 +33,14 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Course Details</h4>
-                @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
-                @if (session('warning'))
-                    <div class="alert alert-warning">{{ session('warning') }}</div>
-                @endif
+                <a href="{{ route('lessons.show', $course->id) }}" class="btn btn-warning">View Lessons</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <tbody>
                             <tr>
-                                <th>Title</th>
+                                <th>Course Title</th>
                                 <td>{{ ucfirst($course->title) }}</td>
                             </tr>
                             <tr>
@@ -91,10 +86,10 @@
                             </tr>
                             @endif
                             @if ($course->duration)
-                            <tr>
-                                <th>Duration</th>
-                                <td>{{ ucfirst($course->duration) }}</td>
-                            </tr>
+                                <tr>
+                                    <th>Duration</th>
+                                    <td>{{ ucfirst($course->duration) }}</td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>

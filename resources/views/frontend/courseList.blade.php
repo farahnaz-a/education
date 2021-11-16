@@ -17,7 +17,13 @@
         <div class="container">
             <!-- Page Banner Content Start -->
             <div class="page-banner-content">
-                <h2 class="title">Course List</h2>
+                <h2 class="title">
+                    @if (Route::is('frontend.courseByCategory'))
+                        {{ ucfirst($category->category_name) }} 
+                    @else
+                    Course List
+                    @endif
+                </h2>
                 <ul class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                     <li class="breadcrumb-item active">Courses</li>
@@ -52,6 +58,7 @@
                         </div>
 
                         <!-- Page Pagination Start -->
+                       
                         @include('includes.pagination')
                         <!-- Page Pagination End -->
 

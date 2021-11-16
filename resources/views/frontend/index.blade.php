@@ -57,7 +57,7 @@
             <div class="courses-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             @include('includes.course')
                         </div>
                     </div>

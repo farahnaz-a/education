@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GeneralSettingController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\SocialurlController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ThemeSettingController;
@@ -54,6 +55,13 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
 
      // CategoryController
      Route::resource('categories', CategoryController::class);
+
+    // CourseController
+    Route::resource('courses', CourseController::class);
+
+    // LessonController
+    Route::post('serialize/{id}', [LessonController::class, 'lessonsSerialize'])->name('lessons.serialze');
+    Route::resource('lessons', LessonController::class);
      
     //  GeneralSettingController
     Route::resource('generalSettings', GeneralSettingController::class);
@@ -69,9 +77,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
     Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
 
 });
-
-    // CourseController
-    Route::resource('courses', CourseController::class);
 
     //  ContactController
     Route::resource('contacts', ContactController::class);

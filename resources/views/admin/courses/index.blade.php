@@ -46,9 +46,10 @@
                         <thead>
                             <tr>
                                 <th>Sl</th>
-                                <th>Title</th>
+                                <th>Course Title</th>
                                 <th>Price</th>
                                 <th>Author</th>
+                                <th>Lesson List</th>
                                 <th>Thumbnail Image</th>
                                 <th>Actions</th>
                             </tr>
@@ -57,9 +58,10 @@
                             @foreach ($courses as $course)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ ucfirst($course->title) }}</td>
+                                <td>{{ ucfirst(Str::limit($course->title, 40)) }}</td>
                                 <td>{{ $course->price }}</td>
                                 <td>{{ ucfirst($course->getAuthor->name) }}</td>
+                                <td> <a href="{{ route('lessons.show', $course->id) }}" class="btn btn-sm btn-info">Lesson List</a> </td>
                                 <td>
                                     <img src="{{ asset('uploads/courses') }}/{{ $course->thumbnail_image }}" style="max-width: 150px" alt="not-found">
                                 </td>

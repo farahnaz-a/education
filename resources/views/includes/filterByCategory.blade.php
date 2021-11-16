@@ -6,8 +6,22 @@
             <ul class="checkbox-list">
                 @foreach ( categories() as $category)  
                     <li class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox3">
-                        <label class="form-check-label" for="checkbox3">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
+                        @if (Route::is('frontend.courseByCategory'))
+                            @if ($courses->count() > 0)
+                                @foreach ($courses as $course)
+                                    @if ($course->category_id == $category->id)     
+                                        <input checked class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}">
+                                    @else
+                                        <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}">
+                                    @endif
+                                @endforeach
+                            @else 
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}"> 
+                            @endif
+                        @else    
+                            <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}"> 
+                        @endif
+                            <label class="form-check-label" for="checkbox{{ $category->id }}">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
                     </li>
                 @endforeach
             </ul>
