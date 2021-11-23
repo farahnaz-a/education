@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'visitor_log' => \App\Http\Middleware\LogVisitor::class,
         'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
         'CheckAuthor' => \App\Http\Middleware\CheckAuthor::class,
+        'CheckUser' => \App\Http\Middleware\CheckUser::class,
     ];
 }

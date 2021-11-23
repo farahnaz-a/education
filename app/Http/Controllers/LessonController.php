@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LessonController extends Controller
 {
+
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('verified');
+        $this->middleware('CheckUser');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -64,8 +76,8 @@ class LessonController extends Controller
         );
 
 
-          // Insert Data in Database
-          $lesson = Lesson::create([
+        // Insert Data in Database
+        $lesson = Lesson::create([
             'course_id'        => $request->course_id,
             'lesson_title'     => $request->lesson_title, 
             'serial'           => $request->serial, 

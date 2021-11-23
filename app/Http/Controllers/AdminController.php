@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Subscriber;
+use App\Models\ThemeSetting;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Shetabit\Visitor\Models\Visit;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -59,7 +63,7 @@ class AdminController extends Controller
     // User List
     public function userList(){
 
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::where('id', '!=' , Auth::id())->orderBy('role', 'asc')->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -70,6 +74,54 @@ class AdminController extends Controller
         return view('admin.users.create');
     }
 
+    // User Create
+    public function userRegister(Request $request){
+
+        $request->validate([
+            'name'     => 'required', 
+            'email'    => 'required|email|unique:users', 
+            'password' => 'required|confirmed|min:8',
+            'role'     => 'required',
+        ]);
+
+        $user = User::create([
+            'name'       => $request->name, 
+            'email'      => $request->email,
+            'role'       => $request->role,
+            'password'   => bcrypt($request->password), 
+            'created_at' => Carbon::now(),
+           ]);
+         
+        ThemeSetting::create([
+            'user_id' => $user->id, 
+            'created_at' => Carbon::now(), 
+        ]); 
+
+
+        // Return Back to List With Success Message
+        return redirect()->route('users.index')->withSuccess('Registered Successfully');
+
+    }
+
+    // User Update
+    public function userUpdate(Request $request,$id){
+
+        $request->validate([
+            'name'  => 'required',
+            'email' => 'required',
+            'role'  => 'required',
+        ]);
+
+        $user = User::find($id);
+
+        $user->name  = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+
+        $user->save();
+
+        return back()->withSuccess('User Updated');
+    }
 
     
      // User Delete
@@ -77,9 +129,21 @@ class AdminController extends Controller
 
         $user = User::find($id);
 
-        $user->delete();
+        $data = Course::where('user_id', $user->id)->get();
 
-        return back()->withSuccess('User deleted');
+        if ($data->count() > 0 ) {
+
+            return back()->withWarning('this user has active course');
+        }
+
+        else{
+
+            $user->delete();
+
+            return back()->withSuccess('User deleted');
+        }
+
+        
     }
     
 }

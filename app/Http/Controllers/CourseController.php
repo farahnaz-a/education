@@ -7,10 +7,22 @@ use App\Models\Course;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Auth;
 use Str;
 
 class CourseController extends Controller
 {
+
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('verified');
+        $this->middleware('CheckUser');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +30,16 @@ class CourseController extends Controller
      */
     public function index()
     { 
+        if(Auth::user()->role == 'admin'){
+            $courses = Course::latest()->get();
+        }
+        else {
+            $courses = Course::where('user_id', Auth::id())->get();
+
+        }
 
         return view('admin.courses.index',[
-            'courses' => Course::latest()->get(),
+            'courses' => $courses,
         ]);
     }
 

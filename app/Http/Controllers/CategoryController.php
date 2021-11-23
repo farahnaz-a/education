@@ -16,8 +16,7 @@ class CategoryController extends Controller
     {
         $this->middleware('auth');
         // $this->middleware('verified');
-        $this->middleware('CheckAdmin');
-        $this->middleware('CheckAuthor');
+        $this->middleware('CheckUser');
     }
 
     /**
@@ -27,6 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        
         return view('admin.categories.index',[
             'categories' => Category::latest()->get(),
         ]);

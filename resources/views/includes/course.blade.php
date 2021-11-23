@@ -1,5 +1,5 @@
 @foreach ($courses as $course)
-    <div class="col-lg-4 col-sm-6" style="margin-top: 40px">
+    <div class="col-lg-4 col-sm-6" style="margin-top: 30px">
         <!-- Single Courses Start -->
         <div class="single-course h-100">
             <div class="courses-image">
@@ -16,7 +16,7 @@
                     <a class="tag" href="javascript:void(0)" style="cursor: default;">{{ ucfirst($course->level) }}</a>
                     @endif
                 </div>
-                <h3 class="title"><a href="">{{ $course->title }}</a></h3>
+                <h3 class="title"><a href="">{{ ucfirst($course->title) }}</a></h3>
                 <p class="author-name">{{ ucfirst($course->getAuthor->name )}}</p>
             </div>
             <div class="courses-meta">

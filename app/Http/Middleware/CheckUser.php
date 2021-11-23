@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class CheckAuthor
+class CheckUser
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class CheckAuthor
      */
     public function handle(Request $request, Closure $next)
     {
-    
+         
         if (Auth::user()->role == 'user') {
 
             return redirect()->back();

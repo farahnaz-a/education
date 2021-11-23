@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\LiveSessionController;
 use App\Http\Controllers\SocialurlController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ThemeSettingController;
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'visitor_log'], function(){
     Route::get('course/list', [FrontendController::class, 'courseList'])->name('frontend.courseList');
     Route::get('course/details/{slug}', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
     Route::get('course/{category_name}', [FrontendController::class, 'courseByCategory'])->name('frontend.courseByCategory');
+    Route::post('course-filterning', [FrontendController::class, 'courseFiltering'])->name('frontend.courseFiltering');
     Route::get('contact-with-us', [FrontendController::class, 'contacts'])->name('frontend.contacts');
     Route::get('search', [FrontendController::class, 'search'])->name('search');
 
@@ -47,6 +49,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
      Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
      Route::get('users/list', [AdminController::class, 'userList'])->name('users.index');
      Route::get('users/create', [AdminController::class, 'userCreate'])->name('users.create');
+     Route::post('users/register', [AdminController::class, 'userRegister'])->name('users.register');
+     Route::post('users/{id}/update', [AdminController::class, 'userUpdate'])->name('users.update');
      Route::get('users/{id}/destroy', [AdminController::class, 'userDestroy'])->name('users.destroy');
 
 
@@ -63,6 +67,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function(){
     Route::post('serialize/{id}', [LessonController::class, 'lessonsSerialize'])->name('lessons.serialze');
     Route::resource('lessons', LessonController::class);
      
+    //  GeneralSettingController
+    Route::resource('liveSessions', LiveSessionController::class);
+
     //  GeneralSettingController
     Route::resource('generalSettings', GeneralSettingController::class);
 

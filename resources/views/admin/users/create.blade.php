@@ -31,30 +31,68 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Create User</h4>
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('warning'))
+                        <div class="alert alert-warning">{{ session('warning') }}</div>
+                    @endif
                 </div>
                 <div class="card-body">
-                    <form class="form form-vertical">
+                    <form  method="POST" action="{{ route('users.register') }}" class="form form-vertical">
+                        @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name">First Name</label>
-                                    <input type="text" id="name" class="form-control" name="name" placeholder="First Name" />
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" class="form-control" name="name" placeholder="Enter name"/>
+                                    @error('name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" id="email" class="form-control" name="email" placeholder="Email" />
+                                    <input type="text" id="email" class="form-control" name="email" placeholder="Enter email"/>
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select name="role" id="role" class="form-control">
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="author">Author</option>
+                                    </select>
+                                    @error('role')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="text" id="password" class="form-control" name="password" placeholder="Password" />
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Enter password"/>
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="reset" class="btn btn-primary mr-1">Submit</button>
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirm Password</label>
+                                    <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="password confirmation"/>
+                                    @error('password_confirmation')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary mr-1">Submit</button>
                             </div>
                         </div>
                     </form>

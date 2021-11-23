@@ -10,18 +10,18 @@
                             @if ($courses->count() > 0)
                                 @foreach ($courses as $course)
                                     @if ($course->category_id == $category->id)     
-                                        <input checked class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}">
+                                        <input checked value="{{ $category->id }}" class="form-check-input" type="radio" name="category" id="checkbox{{ $category->id }}">
                                     @else
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}">
+                                        <input value="{{ $category->id }}" class="form-check-input" type="radio" name="category" id="category{{ $category->id }}">
                                     @endif
                                 @endforeach
                             @else 
-                                <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}"> 
+                                <input value="{{ $category->id }}" class="form-check-input" type="radio" name="category" id="category{{ $category->id }}"> 
                             @endif
                         @else    
-                            <input class="form-check-input" type="checkbox" value="" id="checkbox{{ $category->id }}"> 
+                            <input value="{{ $category->id }}" class="form-check-input" type="radio" name="category" id="category{{ $category->id }}"> 
                         @endif
-                            <label class="form-check-label" for="checkbox{{ $category->id }}">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
+                            <label class="form-check-label" for="category{{ $category->id }}">{{ $category->category_name }} ({{ $category->getCourses->count() }})</label>
                     </li>
                 @endforeach
             </ul>

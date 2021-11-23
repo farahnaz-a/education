@@ -207,7 +207,6 @@
                     },
                     
                     success: function (data) {
-                        // alert(data);
                         $('#summitForm').trigger('reset');
                         $('#nameError').text('');
                         $('#emailError').text('');
@@ -215,7 +214,6 @@
                         $('#subjectError').text('');
                         $('#messageError').text('');
                         $('#success').html('<div class="alert alert-success">You are subscribed </div>');
-                    // $('#error').css('display', 'none');
                     },
                     error: function(response){
                         $('#nameError').text(response.responseJSON.errors.name);

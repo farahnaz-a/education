@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class ColorSettingController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('verified');
+        $this->middleware('CheckAdmin');
+    }
+
     /**
      * Display a listing of the resource.
      *

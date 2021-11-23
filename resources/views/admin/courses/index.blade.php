@@ -56,42 +56,42 @@
                         </thead>
                         <tbody>
                             @foreach ($courses as $course)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ ucfirst(Str::limit($course->title, 40)) }}</td>
-                                <td>{{ $course->price }}</td>
-                                <td>{{ ucfirst($course->getAuthor->name) }}</td>
-                                <td> <a href="{{ route('lessons.show', $course->id) }}" class="btn btn-sm btn-info">Lesson List</a> </td>
-                                <td>
-                                    <img src="{{ asset('uploads/courses') }}/{{ $course->thumbnail_image }}" style="max-width: 150px" alt="not-found">
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
-                                            <i data-feather="more-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('courses.show', $course->id) }}">
-                                                <i data-feather="eye" class="mr-50"></i>
-                                                <span>Show</span>
-                                            </a>
-                                            <a class="dropdown-item" href="{{ route('courses.edit', $course->id) }}">
-                                                <i data-feather="edit-2" class="mr-50"></i>
-                                                <span>Edit</span>
-                                            </a>
-                                            <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
-                                                {{-- Initiate Delete method --}}
-                                                {{ method_field('DELETE') }}
-                                                @csrf 
-                                                <a class="dropdown-item" href="{{ route('courses.destroy', $course->id) }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                                    <i data-feather="trash" class="mr-50"></i>
-                                                    <span>Delete</span>
+                                <tr>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ ucfirst(Str::limit($course->title, 40)) }}</td>
+                                    <td>${{ $course->price }}</td>
+                                    <td>{{ ucfirst($course->getAuthor->name) }}</td>
+                                    <td> <a href="{{ route('lessons.show', $course->id) }}" class="btn btn-sm btn-info">Lesson List</a> </td>
+                                    <td>
+                                        <img src="{{ asset('uploads/courses') }}/{{ $course->thumbnail_image }}" style="max-width: 150px" alt="not-found">
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
+                                                <i data-feather="more-vertical"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ route('courses.show', $course->id) }}">
+                                                    <i data-feather="eye" class="mr-50"></i>
+                                                    <span>Show</span>
                                                 </a>
-                                            </form>
+                                                <a class="dropdown-item" href="{{ route('courses.edit', $course->id) }}">
+                                                    <i data-feather="edit-2" class="mr-50"></i>
+                                                    <span>Edit</span>
+                                                </a>
+                                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                                                    {{-- Initiate Delete method --}}
+                                                    {{ method_field('DELETE') }}
+                                                    @csrf 
+                                                    <a class="dropdown-item" href="{{ route('courses.destroy', $course->id) }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        <i data-feather="trash" class="mr-50"></i>
+                                                        <span>Delete</span>
+                                                    </a>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

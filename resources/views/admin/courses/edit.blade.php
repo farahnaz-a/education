@@ -83,7 +83,7 @@
                                     <option selected value="{{ $course->getCategory->id }}">{{ $course->getCategory->category_name }}</option>
                                     @foreach ($categories as $category)
                                         @if ($category->category_name != $course->getCategory->category_name )
-                                        <option value="{{ $category->id }}">{{ ucfirst($category->category_name) }}</option>
+                                            <option value="{{ $category->id }}">{{ ucfirst($category->category_name) }}</option>
                                         @endif
                                     @endforeach
                                 </select>

@@ -26,7 +26,7 @@ class FrontendController extends Controller
     public function courseList(){
         
         return view('frontend.courseList',[
-            'courses' => Course::latest()->Paginate(9),
+            'courses' => Course::latest()->Paginate(2),
         ]);
     }
 
@@ -42,7 +42,7 @@ class FrontendController extends Controller
         ]);
     }
 
-    // Course Details
+    // Course By Category
     public function courseByCategory($category_name){
 
         $category = Category::where('category_name', $category_name)->first();
@@ -50,6 +50,19 @@ class FrontendController extends Controller
         $courses = Course::where('category_id', $category->id)->Paginate(6);
 
         return view('frontend.courseList',compact('courses', 'category'));
+
+    } 
+
+    // Course Filtering With Ajax
+    public function courseFiltering(Request $request){
+
+        $courses = Course::where('category_id' , $request->category)->Paginate(1);
+
+        $view = view('includes.course',compact('courses'));
+
+        $response = $view->render();
+
+        return response()->json(['response' => $response]);
 
     } 
 
@@ -71,11 +84,11 @@ class FrontendController extends Controller
         return view('frontend.courseList', compact('courses'));
     }
 
-        // Course Contact
-        public function contacts(){
+    // Course Contact
+    public function contacts(){
 
-            return view('frontend.contacts');
-        }
+        return view('frontend.contacts');
+    }
     
 
 

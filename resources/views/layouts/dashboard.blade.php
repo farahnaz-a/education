@@ -274,17 +274,39 @@
                         {{-- Lessons --}}
                         <li class="nav-item @yield('lessons')">
                             <a class="d-flex align-items-center" href="{{ route('lessons.create') }}">
-                                <i data-feather='airplay'></i>
+                                <i data-feather='video'></i>
                                 <span class="menu-title text-truncate">Lessons</span>
                             </a>
+                        </li>
+                        {{-- Live Sessions --}}
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="#">
+                                <i data-feather='airplay'></i>
+                                <span class="menu-title text-truncate" data-i18n="Invoice">Live Sessions</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li class="@yield('liveSessionsList')">
+                                    <a class="d-flex align-items-center" href="{{ route('liveSessions.index') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="List">List</span>
+                                    </a>
+                                </li>
+                                <li class="@yield('liveSessionsCreate')">
+                                    <a class="d-flex align-items-center" href="{{ route('liveSessions.create') }}">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="Add">Create</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @endif
                     {{-- Site Settings --}}
                     @if (Auth::user()->role == 'admin')
+                        {{-- Users --}}
                         <li class=" nav-item">
                             <a class="d-flex align-items-center" href="#">
                                 <i data-feather='user-check'></i>
-                                <span class="menu-title text-truncate" data-i18n="Invoice">Users</span>
+                                <span class="menu-title text-truncate" data-i18n="Invoice">All Users</span>
                             </a>
                             <ul class="menu-content">
                                 <li class="@yield('usersList')">
@@ -322,24 +344,29 @@
                                 <span class="menu-title text-truncate">Subcribers</span>
                             </a>
                         </li>
-                        <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
-                        </li>
+
+                        {{-- <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
+                        </li> --}}
+
                         <li class="navigation-header">
                             <span data-i18n="Apps &amp; Pages">Site Settings</span>
                             <i data-feather="more-horizontal"></i>
                         </li>
+                        {{-- General Settings --}}
                         <li class="nav-item @yield('generalSettings')">
                             <a class="d-flex align-items-center" href="{{ route('generalSettings.index') }}">
                                 <i data-feather='settings'></i>
                                 <span class="menu-title text-truncate">General Settings</span>
                             </a>
                         </li>
+                        {{-- Color Settings --}}
                         <li class="nav-item @yield('colorSettings')">
                             <a class="d-flex align-items-center" href="{{ route('colorSettings.index') }}">
                                 <i data-feather='settings'></i>
                                 <span class="menu-title text-truncate">Color Settings</span>
                             </a>
                         </li>
+                        {{-- Social Urls --}}
                         <li class="nav-item @yield('socialurls')">
                             <a class="d-flex align-items-center" href="{{ route('socialurls.index') }}">
                                 <i data-feather='settings'></i>
@@ -426,6 +453,7 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app.js') }}"></script>
+    @yield('vendor_js')
     <!-- END: Page Vendor JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app-menu.js') }}"></script>
 

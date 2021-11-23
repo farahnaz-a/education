@@ -45,14 +45,15 @@
                         <!-- Course Top Bar Start -->
                         <div class="course-top-bar">
                             <div class="course-top-text">
-                                <p>We found <span>{{ $courses->count() }}</span> Courses For You</p>
+                                <p>Courses</p>
+                                {{-- <p>We found <span>{{ $courses->count() }}</span> Courses For You</p> --}}
                             </div>
                         </div>
                         <!-- Course Top Bar End -->
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="grid">
-                                <div class="row">
-                                    @include('includes.course')
+                                <div class="row" id="category_filtering">
+                                     @include('includes.course')
                                 </div>
                             </div>
                         </div>
@@ -60,6 +61,7 @@
                         <!-- Page Pagination Start -->
                        
                         @include('includes.pagination')
+                        
                         <!-- Page Pagination End -->
 
                     </div>
@@ -75,4 +77,44 @@
         </div>
     </div>
     <!-- Course List End -->
+@endsection
+
+
+@section('js')
+
+    @foreach (categories() as $category)
+        <script>
+            $(document).ready(function () {
+                $('#category{{ $category->id }}').click(function () { 
+                
+
+                let category = $('#category{{ $category->id }}').val();
+                
+                
+                $.ajaxSetup({
+                        headers: 
+                        {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('frontend.courseFiltering') }}",
+                    data: 
+                    {
+                        category:category,
+                    },
+                    success: function (data) {
+                        
+                        $('#category_filtering').html(data.response);
+                    },
+                    
+                });
+                
+                });
+            });
+        </script>
+    @endforeach
+
 @endsection
