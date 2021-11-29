@@ -61,55 +61,27 @@
 
                         <!-- Course Lessons Start -->
                         <div class="course-lessons">
-
                             <div class="lessons-top">
                                 <h3 class="title">Course Content</h3>
                                 <div class="lessons-time">
-                                    <span>10 Lessons</span>
-                                    <span>2hours 10min</span>
+                                    <span>{{ $course->getLessons->count() }} Lessons</span>
+                                    <span>{{ $course->duration }}</span>
                                 </div>
                             </div>
-
                             <!-- Course Accordion Start -->
                             <div class="course-accordion accordion" id="accordionCourse">
-                                <div class="accordion-item">
-                                    <button data-bs-toggle="collapse" data-bs-target="#collapseOne">Introduction </button>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionCourse">
-                                        <div class="accordion-body">
-                                            <ul class="lessons-list">
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> Greetings and Introductions <span>5:00</span></a></li>
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> 5 Business English Phrasal Verbs <span>3:17</span></a></li>
-                                                <li><a href="#"><i class="fa fa-question-circle"></i> Quizz 1 : How to start?</a></li>
-                                            </ul>
+                                @foreach ($course->getLessons as $key => $lesson)
+                                    <div class="accordion-item">
+                                        <button data-bs-toggle="collapse" class="{{ $key != 0 ? 'collapsed' : '' }}" data-bs-target="#collapse{{ $lesson->id }}">{{ ucfirst($lesson->lesson_title) }} </button>
+                                        <div id="collapse{{ $lesson->id }}" class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}" data-bs-parent="#accordionCourse">
+                                            <div class="accordion-body">
+                                                <ul class="lessons-list">
+                                                    <li><a href="#"><i class="fa fa-play-circle"></i> Greetings and Introductions <span>5:00</span></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo">Analysis</button>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionCourse">
-                                        <div class="accordion-body">
-                                            <ul class="lessons-list">
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> Greetings and Introductions <span>5:00</span></a></li>
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> 5 Business English Phrasal Verbs <span>3:17</span></a></li>
-                                                <li><a href="#"><i class="fa fa-question-circle"></i> Quizz 1 : How to start?</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree">Practical</button>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCourse">
-                                        <div class="accordion-body">
-                                            <ul class="lessons-list">
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> Greetings and Introductions <span>5:00</span></a></li>
-                                                <li><a href="#"><i class="fa fa-play-circle"></i> 5 Business English Phrasal Verbs <span>3:17</span></a></li>
-                                                <li><a href="#"><i class="fa fa-question-circle"></i> Quizz 1 : How to start?</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <!-- Course Accordion End -->
 
@@ -140,7 +112,7 @@
                                 <ul class="description-list">
                                     <li><i class="fa fa-clock-o"></i> Duration <span>{{ $course->duration }}</span></li>
                                     <li><i class="fa fa-sliders"></i> Level <span>{{ ucfirst($course->level) }}</span></li>
-                                    <li><i class="fa fa-file-o"></i> Lectures <span>4 Lectures</span></li>
+                                    <li><i class="fa fa-file-o"></i> Lessons <span>{{ $course->getLessons->count() }}</span></li>
                                     <li><i class="fa fa-language"></i> Language <span>{{ ucfirst($course->language) }}</span></li>
                                     <li><i class="fa fa-user-o"></i> Enrolled <span>4 Enrolled</span></li>
                                 </ul>
@@ -160,7 +132,7 @@
                                             <div class="sidebar-course-item">
                                                 <div class="item-image">
                                                     <a href="{{ route('frontend.courseDetails', $item->slug) }}">
-                                                        <img src="{{ asset('frontend_assets/images/courses/courses-2.jpg') }}" alt="Courses">
+                                                        <img src="{{ asset('uploads/courses') }}/{{ $item->thumbnail_image }}" alt="Courses">
                                                     </a>
                                                 </div>
                                                 <div class="item-content">

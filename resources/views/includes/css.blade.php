@@ -3909,7 +3909,9 @@ only screen and (max-width: 767px) {
 }
 
 .single-course .courses-image a img {
-    width: 100%
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .single-course .courses-content {

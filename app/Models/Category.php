@@ -12,9 +12,16 @@ class Category extends Model
     protected $guarded = [];
 
 
+    // getCourses
     public function getCourses(){
 
         return $this->hasMany('App\Models\Course');
+    }
+
+    // getLivesessions
+    public function getLivesessions(){
+
+        return $this->hasMany('App\Models\LiveSession');
     }
 
 }

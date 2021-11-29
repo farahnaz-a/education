@@ -41,9 +41,6 @@ class LiveSessionController extends Controller
      */
     public function store(Request $request)
     {
-
-        dd($request->date);
-
       // Validation 
       $request->validate([
         'title'              => 'required',

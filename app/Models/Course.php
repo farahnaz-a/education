@@ -23,4 +23,10 @@ class Course extends Model
 
         return $this->BelongsTo('App\Models\User', 'user_id', 'id');
     }
+
+    // Get Lessons
+    public function getLessons(){
+
+        return $this->hasMany('App\Models\Lesson', 'course_id', 'id');
+    }
 }

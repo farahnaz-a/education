@@ -33,6 +33,10 @@ Route::group(['middleware' => 'visitor_log'], function(){
     Route::get('course/details/{slug}', [FrontendController::class, 'courseDetails'])->name('frontend.courseDetails');
     Route::get('course/{category_name}', [FrontendController::class, 'courseByCategory'])->name('frontend.courseByCategory');
     Route::post('course-filterning', [FrontendController::class, 'courseFiltering'])->name('frontend.courseFiltering');
+    Route::get('live-sessions', [FrontendController::class, 'liveSessions'])->name('frontend.liveSessions');
+    Route::get('live-sessions/{id}', [FrontendController::class, 'liveSessionsDetails'])->name('frontend.livesessionDetails');
+    Route::post('livesessions-filterning', [FrontendController::class, 'livesessionsFiltering'])->name('frontend.livesessionsFiltering');
+
     Route::get('contact-with-us', [FrontendController::class, 'contacts'])->name('frontend.contacts');
     Route::get('search', [FrontendController::class, 'search'])->name('search');
 

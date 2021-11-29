@@ -100,8 +100,7 @@
 
                     <!-- Contact Form Start -->
                     <div class="contact-form-wrapper">
-                        <form id="summitForm" action="{{ route('contacts.store')}}" method="POST">
-                            @csrf
+                        <form id="summitForm">
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- Single Form Start -->
@@ -145,8 +144,6 @@
                                     <!-- Single Form End -->
                                 </div>
                                 <div class="col-md-12 mt-3" id="success" >
-                                    
-                                    
                                     @if (session('success'))
                                         <div class="alert alert-success">{{ session('success') }}</div>
                                     @endif

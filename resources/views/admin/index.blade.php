@@ -252,7 +252,7 @@ scrollbar-width: none;  /* Firefox */
             </div>
         </div>
 
-        <div class="col-lg-8 col-md-6 col-12 example" style="overflow-y:scroll; max-height: 407px !important">
+        <div class="col-lg-8 col-md-6 col-12 example" style="">
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -262,28 +262,27 @@ scrollbar-width: none;  /* Firefox */
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <th>URL</th>
-                        <th>Visit Count</th>
-                        </thead>
-                        <tbody>
+                   <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <th>URL</th>
+                                <th>Visit Count</th>
+                            </thead>
+                            <tbody>
+                                @foreach($top_pages->take(6) as $item)
+                                    <tr>
+                                        <td>
+                                            <a href="{{$item->url}}" target="_blank">
+                                            {{$item->url}}
+                                            </a>
+                                        </td>
+                                        <td>{{$item->count}}</td>
+                                    </tr>
 
-                        @foreach($top_pages as $item)
-                            <tr>
-                                <td>
-                                    <a href="{{$item->url}}" target="_blank">
-                                    {{$item->url}}
-                                    </a>
-                                </td>
-                                <td>{{$item->count}}</td>
-                            </tr>
-
-                        @endforeach
-
-                        </tbody>
-                    </table>
-
+                                @endforeach
+                            </tbody>
+                        </table>
+                   </div>
                 </div>
             </div>
         </div>

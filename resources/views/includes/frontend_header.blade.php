@@ -32,6 +32,38 @@
     {{-- <link rel="stylesheet" href="{{ asset('frontend_assets/css/style.min.css') }}"> --}}
     @include('includes.css')
 
+    <style>
+        .custom-pagination .pagination .page-item .page-link{
+            color: #3bbca7;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-size: 15px;
+            padding: 0;
+            border-color: transparent;
+            cursor: pointer;
+        }
+        .custom-pagination .pagination .page-item.active .page-link {
+            background-color: #3bbca7;   
+            color: #fff;
+        }
+        .custom-pagination .pagination .page-item.disabled .page-link {
+            color: #ddd;
+        }
+        .custom-pagination .pagination .page-item .page-link:focus{
+            color: inherit !important;
+            background-color: transparent !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+        }
+        .custom-pagination .pagination .page-item .page-link:hover{
+          
+        }
+        
+    </style>
+
 </head>
 
 <body>
@@ -66,6 +98,9 @@
                                 <a class="@yield('courses')" href="{{ route('frontend.courseList') }}">Courses</a>
                             </li>
                             <li>
+                                <a class="@yield('livesessions')" href="{{ route('frontend.liveSessions') }}">Live Sessions</a>
+                            </li>
+                            <li>
                                 <a class="@yield('contacts')" href="{{ route('frontend.contacts') }}">Contact</a>
                             </li>
                         </ul>
@@ -85,6 +120,11 @@
                                 <a class="link" href="{{ route('register') }}">Register</a>
                             </div>
                         @endguest
+                        @auth
+                            <div class="header-login d-none d-lg-flex">
+                                <a class="link" href="{{ route('login') }}"><i class="fa fa-user"></i>My Account</a>
+                            </div>    
+                        @endauth
 
                         <div class="header-toggle d-lg-none">
                             <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
@@ -124,13 +164,22 @@
                             <a class="@yield('courses')" href="{{ route('frontend.courseList') }}">Courses</a>
                         </li>
                         <li>
+                            <a class="@yield('livesessions')" href="{{ route('frontend.liveSessions') }}">Live Sessions</a>
+                        </li>
+                        <li>
                             <a class="@yield('contact')" href="{{ route('frontend.contacts') }}">Contact</a>
                         </li>
                         @guest
                             <li>
                                 <a class="link" href="{{ route('register') }}"><i class="fa fa-user-o"></i> Register</a>
+                                <a class="link" href="{{ route('login') }}"><i class="fa fa-user-o"></i> Login</a>
                             </li>
                         @endguest
+                        @auth
+                            <li>
+                                <a class="link" href="{{ route('login') }}"><i class="fa fa-user"></i> My Account</a>
+                            </li>    
+                        @endauth
                     </ul>
                 </div>
             </div>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\LiveSession;
 use Illuminate\Http\Request;
+use Livewire\LivewireTagCompiler;
 
 class FrontendController extends Controller
 {
@@ -26,7 +28,7 @@ class FrontendController extends Controller
     public function courseList(){
         
         return view('frontend.courseList',[
-            'courses' => Course::latest()->Paginate(2),
+            'courses' => Course::latest()->Paginate(9),
         ]);
     }
 
@@ -56,9 +58,41 @@ class FrontendController extends Controller
     // Course Filtering With Ajax
     public function courseFiltering(Request $request){
 
-        $courses = Course::where('category_id' , $request->category)->Paginate(1);
+        $courses = Course::where('category_id' , $request->category)->Paginate(9);
 
         $view = view('includes.course',compact('courses'));
+
+        $response = $view->render();
+
+        return response()->json(['response' => $response]);
+
+    } 
+
+    // Live Sessions List
+    public function liveSessions(){
+        return view('frontend.live_sessions',[
+            
+            'livesessions' => LiveSession::latest()->Paginate(2),
+        ]);
+    }
+
+    // Live Sessions Details
+    public function liveSessionsDetails($id){
+
+        $livesession = LiveSession::find($id)->first();
+
+        return view('frontend.livesessionsDetails',[
+            'livesession'          => $livesession,
+            'related_livesessions' => LiveSession::where('category_id', $livesession->category_id)->get(),
+        ]);
+    }
+
+    // Course Filtering With Ajax
+    public function livesessionsFiltering(Request $request){
+
+        $livesessions = LiveSession::where('category_id' , $request->category)->Paginate(9);
+
+        $view = view('includes.livesessions',compact('livesessions'));
 
         $response = $view->render();
 

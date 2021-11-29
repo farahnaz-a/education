@@ -6,7 +6,7 @@
 @endsection
 
 {{-- Menu Active --}}
-@section('courses')
+@section('livesessions')
     active
 @endsection
 
@@ -21,12 +21,12 @@
                     @if (Route::is('frontend.courseByCategory'))
                         {{ ucfirst($category->category_name) }} 
                     @else
-                    Course List
+                        Live Sessions
                     @endif
                 </h2>
                 <ul class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Courses</li>
+                    <li class="breadcrumb-item active">Live Sessions</li>
                 </ul>
             </div>
             <!-- Page Banner Content End -->
@@ -45,32 +45,49 @@
                         <!-- Course Top Bar Start -->
                         <div class="course-top-bar">
                             <div class="course-top-text">
-                                <p>Courses</p>
-                                {{-- <p>We found <span>{{ $courses->count() }}</span> Courses For You</p> --}}
+                                <p>Live Sessions</p>
                             </div>
                         </div>
                         <!-- Course Top Bar End -->
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="grid">
                                 <div class="row" id="category_filtering">
-                                     @include('includes.course')
+                                     @include('includes.livesessions')
                                 </div>
                             </div>
                         </div>
 
                         <!-- Page Pagination Start -->
                        
-                        @include('includes.pagination')
+                        <div class="page-pagination custom-pagination">{{ $livesessions->links() }}</div>
                         
                         <!-- Page Pagination End -->
 
                     </div>
+
                     <div class="col-lg-3 order-0 order-lg-1">
                         <!-- Sidebar Wrapper Start -->
-                        @include('includes.filterByCategory')
+                        <div class="sidebar-wrap-02">
+                            <!-- Sidebar Wrapper Start -->
+                            <div class="sidebar-widget-02">
+                                <h3 class="widget-title">Categories</h3>
+                                <div class="widget-checkbox">
+                                    <ul class="checkbox-list">
+                                        @foreach ( categories() as $category)  
+                                            <li class="form-check">
+                                                <input value="{{ $category->id }}" class="form-check-input" type="radio" name="category" id="category{{ $category->id }}">
+                                                <label class="form-check-label" for="category{{ $category->id }}">{{ $category->category_name }} ({{ $category->getLivesessions->count() }})</label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sidebar Wrapper End -->
+                        </div>
                         <!-- Sidebar Wrapper End -->
                     </div>
                 </div>
+
             </div>
             <!-- Course List Wrapper End -->
 
@@ -87,9 +104,7 @@
             $(document).ready(function () {
                 $('#category{{ $category->id }}').click(function () { 
                 
-
                 let category = $('#category{{ $category->id }}').val();
-                
                 
                 $.ajaxSetup({
                         headers: 
@@ -100,7 +115,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('frontend.courseFiltering') }}",
+                    url: "{{ route('frontend.livesessionsFiltering') }}",
                     data: 
                     {
                         category : category,
