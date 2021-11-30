@@ -123,9 +123,11 @@
 
                         <!-- Sidebar Course Start -->
                         <div class="sidebar-details-course">
+                            @if($related_courses->count() > 1)
                             <h4 class="sidebar-details-title">Releted Courses</h4>
+                            @endif
                             <ul class="sidebar-details-courses">
-                                @foreach ($related_courses as $item)
+                                @forelse ($related_courses as $item)
                                     @if ($course->id != $item->id)
                                         <li>
                                             <!-- Single Course Start -->
@@ -142,10 +144,10 @@
                                             </div>
                                             <!-- Single Course End -->
                                         </li>
-                                    @else 
-                                        No Related Course
                                     @endif
-                                @endforeach
+                                @empty 
+                                No Related Course    
+                                @endforelse
                             </ul>
                         </div>
                         <!-- Sidebar Course End -->
