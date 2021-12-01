@@ -301,6 +301,9 @@
                         </li>
                     @endif
                     {{-- Site Settings --}}
+                    <li class="navigation-header">
+                        <span data-i18n="Apps &amp; Pages">Site Settings</span><i data-feather="more-horizontal"></i>
+                    </li>
                     @if (Auth::user()->role == 'admin')
                         {{-- Users --}}
                         <li class=" nav-item">
@@ -345,13 +348,6 @@
                             </a>
                         </li>
 
-                        {{-- <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Courses</span><i data-feather="more-horizontal"></i>
-                        </li> --}}
-
-                        <li class="navigation-header">
-                            <span data-i18n="Apps &amp; Pages">Site Settings</span>
-                            <i data-feather="more-horizontal"></i>
-                        </li>
                         {{-- General Settings --}}
                         <li class="nav-item @yield('generalSettings')">
                             <a class="d-flex align-items-center" href="{{ route('generalSettings.index') }}">
@@ -512,6 +508,7 @@
     </script>
 
 
+    {{-- Feather Icon --}}
     <script>
         $(window).on('load', function() {
             if (feather) {

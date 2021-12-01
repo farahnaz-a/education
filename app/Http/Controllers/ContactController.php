@@ -16,7 +16,7 @@ class ContactController extends Controller
     {
         $this->middleware('auth')->only('index');
         // $this->middleware('verified');
-        $this->middleware('checkAdmin')->only('index');
+        $this->middleware('CheckAdmin')->only('index');
     }
 
 
