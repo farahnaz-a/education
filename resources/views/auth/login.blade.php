@@ -11,7 +11,6 @@
                 {{ session('status') }}
             </div>
         @endif
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -42,16 +41,16 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-              @auth
-              <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-              @endauth
-              @guest
-              <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-              @endguest
+                    @auth
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endauth
+                    @guest
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endguest
                 @endif
 
                 <x-jet-button class="ml-4">

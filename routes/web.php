@@ -11,6 +11,7 @@ use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LiveSessionController;
 use App\Http\Controllers\SocialurlController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ThemeSettingController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Stripe Payment
+Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('stripe/post', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 Route::group(['middleware' => 'visitor_log'], function(){
 

@@ -13,7 +13,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "shetabit/visitor": "^3.1"
+        "shetabit/visitor": "^3.1",
+        "stripe/stripe-php": "^7.104"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
